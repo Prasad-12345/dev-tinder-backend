@@ -48,12 +48,14 @@ paymentRouer.post("/payment/create", userAuth, async (req, res) => {
 
 paymentRouer.post("/payment/webhook", async (req, res) => {
   try {
+    console.log("webhook called")
     const webHookSignature = req.headers["x-razorpay-signature"]
     const isWebhookValid = validateWebhookSignature(
       JSON.stringify(req.body),
       webHookSignature,
       process.env.razorpay_webhook_secret
     );
+    console.log("isWebhookValid" + isWebhookValid)
     if(!isWebhookValid){
         return res.json({message:"webhook is invalid"})
     }
@@ -62,6 +64,7 @@ paymentRouer.post("/payment/webhook", async (req, res) => {
     const payment = await Payment.findOne({orderId:paymentDetails.order_id})
     payment.status = paymentDetails.status
     await payment.save()
+    console.log("saving payment details")
     const user = await User.findOne(payment.userId)
     user.isPremium = true
     await user.save()
