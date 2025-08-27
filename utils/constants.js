@@ -1,0 +1,3 @@
+const MEMBERSHIP_AMOUNT = "50000"
+
+module.exports = MEMBERSHIP_AMOUNT
