@@ -9,19 +9,11 @@ const app = express()
 dotenv.config()
 require('../utils/cronJob')
 
-const corsOptions = {
-    origin: "*", // only your frontend
-    credentials: true, // allow cookies/authorization headers
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
-
-app.use((req, res, next) => {
-  console.log("CORS headers:", res.getHeaders());
-  next();
-});
+app.use(cors({
+    origin: ["http://localhost:5173","https://dev-tinder-web-2c4g.onrender.com"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+}));
 
 app.use(express.json())
 app.use(cookies())
