@@ -5,8 +5,8 @@ const connectionRequest = require("../src/model/connectionRequest")
 const initializeSocket = (server) => {
     const io = socket(server, {
         cors:{
-            // origin:["http://localhost:5173", "https://dev-tinder-web-2c4g.onrender.com"],
-            origin: "https://dev-tinder-web-2c4g.onrender.com",
+            origin:["http://localhost:5173", "https://dev-tinder-web-2c4g.onrender.com"],
+            // origin: "https://dev-tinder-web-2c4g.onrender.com",
             credentials: true
         },
     })
