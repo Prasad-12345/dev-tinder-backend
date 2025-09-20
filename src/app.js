@@ -10,7 +10,8 @@ dotenv.config()
 require('../utils/cronJob')
 
 app.use(cors({
-    origin: ["http://localhost:5173","https://dev-tinder-web-2c4g.onrender.com"],
+    // origin: ["http://localhost:5173","https://dev-tinder-web-2c4g.onrender.com"],
+    origin: "https://dev-tinder-web-2c4g.onrender.com",
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 }));
