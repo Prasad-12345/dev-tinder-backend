@@ -100,12 +100,12 @@ app.use(cookies());
 
 // 5️⃣ Routes
 // IMPORTANT: mount routers AFTER preflight
-app.use('/auth', require('./routes/auth'));
-app.use('/profile', require('./routes/profile'));
-app.use('/request', require('./routes/requests'));
-app.use('/user', require('./routes/user'));
-app.use('/payment', require('./routes/payment'));
-app.use('/chat', require('./routes/chat'));
+app.use('/', require('./routes/auth'));
+app.use('/', require('./routes/profile'));
+app.use('/', require('./routes/requests'));
+app.use('/', require('./routes/user'));
+app.use('/', require('./routes/payment'));
+app.use('/', require('./routes/chat'));
 
 // 6️⃣ HTTP server + socket
 const server = http.createServer(app);
