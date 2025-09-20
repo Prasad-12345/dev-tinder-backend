@@ -9,14 +9,27 @@ const app = express()
 dotenv.config()
 require('../utils/cronJob')
 
+app.use(express.json())
+
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Origin", allowedOrigin);
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type,Authorization");
+    return res.sendStatus(200); // respond to preflight without hitting routes
+  }
+  next(); // continue to normal routes for non-OPTIONS requests
+});
+
 app.use(cors({
     // origin: ["http://localhost:5173","https://dev-tinder-web-2c4g.onrender.com"],
     origin: "https://dev-tinder-web-2c4g.onrender.com",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type","Authorization"]
 }));
 
-app.use(express.json())
 app.use(cookies())
 
 const authRouter = require('./routes/auth')
