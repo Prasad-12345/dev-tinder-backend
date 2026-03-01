@@ -11,7 +11,7 @@ profileRouter.get('/profile/view', userAuth, async (req, res) => {
     if(req.user){
         return res.send(req.user)
     }
-    return res.send("user not found")
+    return res.json({"status":401, "message":"user not found"})
 })
 
 profileRouter.post('/profile/edit', userAuth,async (req, res)=>{
